@@ -1,0 +1,4 @@
+AuthUserFile /home/lucas-lett/admin/.htpasswd
+AuthName "Accès sécurisé au panneau administration"
+AuthType Basic
+Require valid-user

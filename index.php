@@ -1,3 +1,8 @@
+<?php
+require "bdd.php";
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -19,11 +24,9 @@
 	
 	<link href="common-css/ionicons.css" rel="stylesheet">
 	
-	<link href="common-css/fluidbox.min.css" rel="stylesheet">
+	<link href="style/styles.css" rel="stylesheet">
 	
-	<link href="02-cv-boxed/css/styles.css" rel="stylesheet">
-	
-	<link href="02-cv-boxed/css/responsive.css" rel="stylesheet">
+	<link href="style/responsive.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -59,7 +62,7 @@
 					</div><!-- col-sm-8 -->
 					
 					<div class="col-sm-10 col-md-3 col-lg-3">
-						<a class="downlad-btn" href="CV.html">Téléchargez mon CV</a>
+						<a class="downlad-btn" href="CV.php">Téléchargez mon CV</a>
 					</div><!-- col-lg-2 -->
 			
 				</div><!-- row -->
@@ -88,7 +91,7 @@
 						Par ailleur, je suis bénévole dans de nombreuses associations allant de l'association des donneurs de sang à l'organisation
 						de festivals ou de conventions sur Strasbourg et sa région.<br>
 						Dans mon temps libre, j'aime me détendre en visionnant des films et séries ou en jouant aux jeux-vidéo. J'apprécie
-						également me balader en ville et jouer au badminton, sport que ja pratique depuis de nombreuses années. 
+						également me balader en ville et jouer au badminton, sport que je pratique depuis de nombreuses années. 
 					</p>
 					
 				
@@ -160,6 +163,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-3">
 					<div class="heading">
+
 						<h3><b>Portfolio</b></h3>
 										</div>
 				</div><!-- col-sm-3 -->
@@ -167,57 +171,45 @@
 				<div class="col-sm-12 col-md-9">
 					<div class="portfolioFilter clearfix margin-b-80">
 						<a href="#" data-filter="*" class="current"><b>TOUT</b></a>
-						<a href="#" data-filter=".web"><b>WEB</b></a>
-						<a href="#" data-filter=".prog"><b>PROGRAMMATION</b></a>
-						<a href="#" data-filter=".minecraft"><b>MINECRAFT</b></a>
-						<a href="#" data-filter=".divers"><b>DIVERS</b></a>
+
+						<?php
+							$sql = 'SELECT DISTINCT TYPE FROM portfolio ORDER BY TYPE DESC';
+							$req = $pdo->query($sql);
+							while($row = $req->fetch())
+							{
+								?>
+									<a href="#" data-filter=".<?php echo $row['TYPE'] ?>"><b><?php echo strtoupper($row['TYPE']) ?></b></a>
+								<?php
+							}
+
+
+						?>
+
 					</div><!-- portfolioFilter -->
 				</div><!-- col-sm-8 -->
 			</div><!-- row -->
 			
 			<div class="portfolioContainer  margin-b-50">
-			<!--	
-				<div class="p-item web">
-					<a href="images/portfolio-13-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-13-400x400.jpg" alt=""></a>
-				</div>
-				
-				<div class="p-item branding graphic-design">
-					<a href="images/portfolio-14-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-14-400x400.jpg" alt=""></a>
-				</div>
-				
-				<div class="p-item web-design">
-					<a href="images/portfolio-15-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-15-400x400.jpg" alt=""></a>
-				</div>
-				
-				<div class="p-item graphic-design">
-					<a class="img" href="images/portfolio-16-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-16-400x400.jpg" alt=""></a>
-				</div>
-				
-				<div class="p-item branding graphic-design">
-					<a href="images/portfolio-17-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-17-400x400.jpg" alt=""></a>
-				</div>
-				
-				<div class="p-item graphic-design web-design">
-					<a href="images/portfolio-18-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-18-400x400.jpg" alt=""></a>
-				</div>
-				
-				<div class="p-item  graphic-design branding">
-					<a href="images/portfolio-19-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-19-400x400.jpg" alt=""></a>
-				</div>
-					
-				<div class="p-item web-design branding">
-					<a href="images/portfolio-20-400x400.jpg" data-fluidbox>
-						<img src="images/portfolio-20-400x400.jpg" alt=""></a>
-				</div>
-			-->
-			Portfolio en construction...
+
+<?php
+	$sql = 'SELECT * FROM portfolio';
+	$req = $pdo->query($sql);
+	while($row = $req->fetch())
+	{
+		?>
+		<div class="p-item boite <?php echo $row["TYPE"] ?>">
+			<a href="projet.php?id=<?php echo $row["ID"] ?>">
+				<img src="images/portfolio/<?php echo $row["ID"] ?>/<?php echo $row["APERCU"] ?>" alt="">
+				<div class="legende"><?php echo $row["NOM"] ?></div>
+			</a>
+		</div>
+
+		<?php
+	}
+	$req->closeCursor();
+?>    
+
+
 			</div><!-- portfolioContainer -->
 		</div><!-- container -->
 	</section><!-- portfolio-section -->
@@ -334,8 +326,9 @@
 
 	
 	
-	<footer>
+	<footer style="    z-index: 1; bottom: 0px; position: fixed;  left: 0;  right: 0;" >
 		<p class="copyright">
+		<a href="admin"><img style="height:30px; width:30px;" src="images/settings.png"></a>
 			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ion-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

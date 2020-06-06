@@ -52,10 +52,10 @@
 		return;
 	});
 	
-	
+	/*
 	if ( $.isFunction($.fn.fluidbox) ) {
 		$('a').fluidbox();
-	}
+	}*/
 	
 	var countCounterUp = 0;
 	

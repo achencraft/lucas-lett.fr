@@ -21,9 +21,9 @@
 	
 	<link href="common-css/fluidbox.min.css" rel="stylesheet">
 	
-	<link href="02-cv-boxed/css/styles.css" rel="stylesheet">
+	<link href="style/styles.css" rel="stylesheet">
 	
-	<link href="02-cv-boxed/css/responsive.css" rel="stylesheet">
+	<link href="style/responsive.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -59,7 +59,7 @@
 					</div><!-- col-sm-8 -->
 					
 					<div class="col-sm-10 col-md-3 col-lg-3">
-						<a class="downlad-btn" href="index.html">Retour à l'accueil</a>
+						<a class="downlad-btn" href="index.php">Retour à l'accueil</a>
 					</div><!-- col-lg-2 -->
 			
 				</div><!-- row -->
@@ -109,8 +109,10 @@
 		</div><!-- container -->
 	</section><!-- about-section -->
 	
-	<footer>
+	<footer style=" bottom: 0px; position: fixed;  left: 0;  right: 0;" >
 		<p class="copyright">
+		<a href="admin"><img style="height:30px; width:30px;" src="images/settings.png"></a>
+		
 			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ion-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

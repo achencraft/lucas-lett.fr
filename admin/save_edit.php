@@ -21,7 +21,7 @@ $liens = htmlspecialchars($_POST['LIENS']);
     $req->bindValue(':i', $id, PDO::PARAM_INT);
     if($req->execute())
     {
-       header('Location: index.php');
+       header('Location: ../projet.php?id='.$id);
     }
     else{
         echo "Une erreur est survenue";

@@ -30,6 +30,8 @@ require "../bdd.php";
 	
 </head>
 <body>
+
+<div id="wrap">
 	
 	<section class="intro-section">
 		<div class="container" >
@@ -104,7 +106,7 @@ require "../bdd.php";
 
 	
 	
-	<footer style="    z-index: 1; bottom: 0px; position: fixed;  left: 0;  right: 0;" >
+	<footer style="    z-index: 1; bottom: 0px; position: absolute;  left: 0;  right: 0;" >
 		<p class="copyright">
 		<a href=""><img style="height:30px; width:30px;" src="../images/settings.png"></a>
 			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -132,5 +134,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 	<script src="../common-js/scripts.js"></script>
 	
+</div>
+
 </body>
 </html>

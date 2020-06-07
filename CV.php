@@ -27,6 +27,8 @@
 	
 </head>
 <body>
+
+<div id="wrap">
 	
 	<section class="intro-section">
 		<div class="container" style="margin-top: 10%;">
@@ -109,7 +111,7 @@
 		</div><!-- container -->
 	</section><!-- about-section -->
 	
-	<footer style=" bottom: 0px; position: fixed;  left: 0;  right: 0;" >
+	<footer style=" bottom: 0px; position: absolute;  left: 0;  right: 0;" >
 		<p class="copyright">
 		<a href="admin"><img style="height:30px; width:30px;" src="images/settings.png"></a>
 		
@@ -138,5 +140,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 	<script src="common-js/scripts.js"></script>
 	
+
+</div>
 </body>
 </html>

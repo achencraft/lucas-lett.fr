@@ -30,6 +30,8 @@ require "../bdd.php";
 	
 </head>
 <body>
+
+<div id="wrap">
 	
 <section class="intro-section">
 		<div class="container" >
@@ -164,7 +166,7 @@ require "../bdd.php";
 
 	
 	
-	<footer style=" bottom: 0px; position: fixed;  left: 0;  right: 0;" >
+	<footer style=" bottom: 0px; position: absolute;  left: 0;  right: 0;" >
 		<p class="copyright">
 		<a href="index.php"><img style="height:30px; width:30px;" src="../images/settings.png"></a>
 		
@@ -194,6 +196,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script> All right
 	
 	<script src="../common-js/scripts.js"></script>
 	
+    </div>
 </body>
 </html>
 

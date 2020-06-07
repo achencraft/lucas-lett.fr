@@ -32,6 +32,8 @@ $projet_id = htmlspecialchars($_GET['id']);
 	
 </head>
 <body>
+
+<div id="wrap">
 	
 <section class="intro-section">
 		<div class="container" >
@@ -79,7 +81,7 @@ $projet_id = htmlspecialchars($_GET['id']);
 	<section class="about-section section">
 		<div class="container">
 
-        <h3> EDITION&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="delete.php?id=<?php echo $projet_id?>">&#10008;</a> </h3>
+        <h3> EDITION&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="delete.php?id=<?php echo $projet_id?>">&#10008;</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="../projet.php?id=<?php echo $projet_id?>">👁</a></h3>
 <?php
 
 
@@ -202,7 +204,7 @@ else
 
 	
 	
-	<footer style=" bottom: 0px; position: fixed;  left: 0;  right: 0;" >
+	<footer style=" bottom: 0px; position: absolute;  left: 0;  right: 0;" >
 		<p class="copyright">
 		<a href="index.php"><img style="height:30px; width:30px;" src="../images/settings.png"></a>
 		
@@ -231,7 +233,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script> All right
 	<script src="../common-js/jquery.fluidbox.min.js"></script>
 	
 	<script src="../common-js/scripts.js"></script>
-	
+	</div>
 </body>
 </html>
 

@@ -23,13 +23,17 @@ require "bdd.php";
 	<link href="common-css/bootstrap.css" rel="stylesheet">
 	
 	<link href="common-css/ionicons.css" rel="stylesheet">
+
+	<link href="style/responsive.css" rel="stylesheet">
 	
 	<link href="style/styles.css" rel="stylesheet">
 	
-	<link href="style/responsive.css" rel="stylesheet">
+
 	
 </head>
 <body>
+
+<div id="wrap">
 	
 <section class="intro-section">
 		<div class="container" >
@@ -63,7 +67,6 @@ require "bdd.php";
 					
 					<div class="col-sm-10 col-md-3 col-lg-3">
                         <a class="downlad-btn" href="CV.php">Téléchargez mon CV</a>
-                        <br>
                         <a class="downlad-btn" href="index.php">Retour à l'accueil</a>
 					</div><!-- col-lg-2 -->
 			
@@ -93,34 +96,93 @@ if(isset($projet_id) && projet_existe($projet_id))
 
 ?>
 
-    <h2><?php echo $row['NOM'] ?></h2>
+    <h2><?php echo $row['NOM'] ?></h2><br>
 
     <div class="row">
 
-        <div class="col-8">
-            <?php echo $row['DESCRIPTION'] ?>
+        <div id="projet_pres" class="col-8" style="text-align:justify;">
+			<?php echo htmlspecialchars_decode($row['DESCRIPTION']) ?>
+			
+			
         </div>
 
         <div class="col-4"> 
 
-        <div id="slider">
+        <div class="slider" id="slider_maxi">
             <a  class="control_next">>></a>
             <a  class="control_prev"><</a>
             <ul>
-                <li>SLIDE 1</li>
-                <li style="background: #aaa;">SLIDE 2</li>
-                <li>SLIDE 3</li>
-                <li style="background: #aaa;">SLIDE 4</li>
-            </ul>  
-        </div>
+				<?php
+					for($i = 0; $i < $row['NOMBRE_IMAGE']; $i++)
+					{
+						?>
+	
+						<li onclick="show('images/portfolio/<?php echo $row['ID']?>/image_<?php echo $i?>.jpg')" style="background-image: url('images/portfolio/<?php echo $row['ID']?>/image_<?php echo $i?>.jpg')"></li>
+	
+						
+						<?php
+					}
+
+				?>
+
+                
+			</ul>  
+
+			
+
+			<!-- Creates the bootstrap modal where the image will appear -->
+			<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Visualisation</h4>
+				</div>
+				<div class="modal-body">
+					<img src="" id="imagepreview" style="width: 100%; height: 100%;" >
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+				</div>
+			</div>
+			</div>
+			
 
         </div>
 
+        </div>
 
-    </div>
 
-    <?php echo $row['LIENS'] ?>
+	</div>
+	<!--
+	<div class="row slider" id="slider_mini" style="width:100%;">
 
+
+            <a  class="control_next">>></a>
+            <a  class="control_prev"><</a>
+            <ul>
+				<?php
+					for($i = 0; $i < $row['NOMBRE_IMAGE']; $i++)
+					{
+						?>
+	
+						<li onclick="show('images/portfolio/<?php echo $row['ID']?>/image_<?php echo $i?>.jpg')" style="background-image: url('images/portfolio/<?php echo $row['ID']?>/image_<?php echo $i?>.jpg')"></li>
+	
+						
+						<?php
+					}
+
+				?>
+
+                
+			</ul>  
+	</div>-->
+
+	<br>
+	<div class="liens" style="word-break: break-all;">
+    <?php echo htmlspecialchars_decode($row['LIENS'] )?>
+	</div>
 
 
 
@@ -145,8 +207,10 @@ else
 
 	
 	
-	<footer style=" bottom: 0px; position: fixed;  left: 0;  right: 0;" >
+	<footer style=" bottom: 0px; position: absolute;  left: 0;  right: 0;" >
 		<p class="copyright">
+		<a href="admin/edit.php?id=<?php echo $projet_id ?>"><img style="height:25px; width:25px;" src="images/edit.png"></a>
+		
 		<a href="admin"><img style="height:30px; width:30px;" src="images/settings.png"></a>
 		
 			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -175,6 +239,8 @@ Copyright ©<script>document.write(new Date().getFullYear());</script> All right
 	
 	<script src="common-js/scripts.js"></script>
 	
+
+	</div>
 </body>
 </html>
 
@@ -208,40 +274,80 @@ function projet_existe($id)
 
 <script>
 
-var slideCount = $('#slider ul li').length;
-	var slideWidth = $('#slider ul li').width();
-	var slideHeight = $('#slider ul li').height();
+    var slideCount = $('#slider_maxi ul li').length;
+	var slideWidth = $('#slider_maxi ul li').width();
+	var slideHeight = $('#slider_maxi ul li').height();
 	var sliderUlWidth = slideCount * slideWidth;
 	
-	$('#slider').css({ width: slideWidth, height: slideHeight });
+	$('#slider_maxi').css({ width: slideWidth, height: slideHeight });
 	
-	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	$('#slider_maxi ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
 	
-    $('#slider ul li:last-child').prependTo('#slider ul');
+    $('#slider_maxi ul li:last-child').prependTo('#slider_maxi ul');
 
     function moveLeft() {
-        $('#slider ul').animate({
+        $('#slider_maxi ul').animate({
             left: + slideWidth
         }, 200, function () {
-            $('#slider ul li:last-child').prependTo('#slider ul');
-            $('#slider ul').css('left', '');
+            $('#slider_maxi ul li:last-child').prependTo('#slider_maxi ul');
+            $('#slider_maxi ul').css('left', '');
         });
     };
 
     function moveRight() {
-        $('#slider ul').animate({
+        $('#slider_maxi ul').animate({
             left: - slideWidth
         }, 200, function () {
-            $('#slider ul li:first-child').appendTo('#slider ul');
-            $('#slider ul').css('left', '');
+            $('#slider_maxi ul li:first-child').appendTo('#slider_maxi ul');
+            $('#slider_maxi ul').css('left', '');
         });
     };
 
     $('a.control_prev').click(function () {
         moveLeft();
+		moveLeft2();
     });
 
     $('a.control_next').click(function () {
         moveRight();
+		moveRight2();
     });
+
+	var slideCount2 = $('#slider_mini ul li').length;
+	var slideWidth2 = $('#slider_mini ul li').width();
+	var slideHeight2 = $('#slider_mini ul li').height();
+	var sliderUlWidth2 = slideCount2 * slideWidth2;
+	
+	$('#slider_mini').css({ width: slideWidth2, height: slideHeight2 });
+	
+	$('#slider_mini ul').css({ width: sliderUlWidth2, marginLeft: - slideWidth2 });
+	
+    $('#slider_mini ul li:last-child').prependTo('#slider_mini ul');
+
+    function moveLeft2() {
+        $('#slider_mini ul').animate({
+            left: + slideWidth2
+        }, 200, function () {
+            $('#slider_mini ul li:last-child').prependTo('#slider_mini ul');
+            $('#slider_mini ul').css('left', '');
+        });
+    };
+
+    function moveRight2() {
+        $('#slider_mini ul').animate({
+            left: - slideWidth2
+        }, 200, function () {
+            $('#slider_mini ul li:first-child').appendTo('#slider_mini ul');
+            $('#slider_mini ul').css('left', '');
+        });
+    };
+
+	function show(src)
+	{
+		$('#imagepreview').attr('src', src); // here asign the image to the modal when the user click the enlarge link
+   		$('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+
+	}
+
+
 </script>

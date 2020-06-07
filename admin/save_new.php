@@ -22,7 +22,8 @@ $liens = htmlspecialchars($_POST['LIENS']);
         $last_id = $pdo->lastInsertId();
         $path = "../images/portfolio/$last_id";
         mkdir($path);
-        header('Location: index.php');
+        chown ( $path , "lucas-lett" ) ;
+        header('Location: ../projet.php?id='.$id);
     }
     else{
         echo "Une erreur est survenue";
